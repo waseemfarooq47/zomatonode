@@ -13,7 +13,7 @@ dotenv.config();
 var MongoUrl="mongodb+srv://testadd:test@cluster0.arhd2.mongodb.net/waseemdata?retryWrites=true&w=majority"
 const bodyParser=require("body-parser")
 const cors=require("cors")
-var port = process.env.PORT || 4545
+var port = process.env.PORT || 4549
 
 var db;
 app.use(bodyParser.urlencoded({extended:true}));
