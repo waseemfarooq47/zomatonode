@@ -1,0 +1,51 @@
+***use of conditions***
+db.zomato.find({state_id:3}).pretty()
+
+>>>>using condition on basis of particular key
+db.zomato.find({"cuisines.cuisine_id":4})
+
+>>>>using condition on basis of particular key
+db.zomato.find({state_id:1,"cuisines.cuisine_id":4}).pretty()
+
+
+>>>>using of count
+db.zomato.count({"cuisines.cuisine_id":4})  !(note: don't use pretty)
+
+>>using condition based like less than greater than projection
+(lessthan)
+db.zomato.find({cost:{$lt:500}},{restaurant_name:1,cost:1}).pretty()
+(greaterthan)
+db.zomato.find({cost:{$gt:500}},{restaurant_name:1,cost:1}).pretty()
+
+>>using condition based like AND | OR projection
+>>>AND
+syntax>> {$and:[{cost:{$gt:1000,$lt:500}}]}
+db.zomato.find({$and:[{cost:{$gt:500,$lt:1000}}]},{restaurant_name:1,cost:1}).pretty()
+>>>OR
+db.zomato.find({$or:[{cost:{$gt:500,$lt:1000}}]},{restaurant_name:1,cost:1}).pretty()
+
+>>using condition using $in projection
+db.menu.find({menu_id: {$in:[5,9,33]}}).pretty()
+
+>>using condition using limit projection
+db.zomato.find({cost:{$lt:500}}).limit(5).pretty()
+
+>>using condition using sort projection
+db.zomato.find({cost:{$gt:500}},{restaurant_name:1,cost:1}).sort({cost:1}).pretty()  ascendong order
+db.zomato.find({cost:{$gt:500}},{restaurant_name:1,cost:1}).sort({cost:-1}).pretty() decending order
+
+//***using projection for particular field***
+syntax: db.zomato.find({condition},{projection}) 
+A>>>> db.zomato.find({state_id:4},{restaurant_id:1,restaurant_name:1,cost:1}) 
+(projection with condition)
+
+B>>>> db.zomato.find({},{restaurant_id:1,restaurant_name:1,cost:1}) 
+(projection without condition)
+
+>>using multiple condition in projection
+C>>>> db.zomato.find({state_id:3,location_id:10},{restaurant_id:1,restaurant_name:1,cost:1}).pretty() 
+
+//**** delete ***
+
+db.collection.remove({},(err,res))  //this will remove all data
+db.collection.remove({id=2},(err,res))  //delete from particular id
